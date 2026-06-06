@@ -8,12 +8,12 @@ def find_winning_move(board:Board,player:Stone)->Move:
         directions=[(1,0),(0,1),(1,1),(1,-1)]
         for direction in directions:
             count=count_direction(board,player,move,direction)
-            if count>=4:
+            if count>=5:
                 return move
             continue
     return None
 
-def find_best_move(board:Board,player:Stone)->Move:
+def heuristic_find_best_move(board:Board,player:Stone)->Move:
     best_score=-1
     best_move=None
     winning_move=find_winning_move(board,player)
@@ -29,9 +29,8 @@ def find_best_move(board:Board,player:Stone)->Move:
             best_move=move
     return best_move
         
-
-def evaluate_move(board:Board,player:Stone,move:Move)->Move:
-    score=0
+# 评估一个落子的位置的分数，分数越高越好
+def evaluate_move(board:Board,player:Stone,move:Move)->float:
     # 优先选择防守
     defense_score=evaluate_stone(board,player.opponent,move)*1.1
     attack_score=evaluate_stone(board,player,move)
@@ -66,6 +65,8 @@ def get_center_score(board:Board,move:Move)->int:
     return board.size-distance
 
 def count_score_list(count:int)->int:
+    if count>=5:
+        return 10000000
     if count==4:
         return 1000
     if count==3:

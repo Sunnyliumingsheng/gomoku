@@ -15,3 +15,9 @@ pip install -e .
 ```bash
 python -m gomoku_ai.cli
 ```
+
+## Evaluate
+
+```bash
+python -m gomoku_ai.match
+```

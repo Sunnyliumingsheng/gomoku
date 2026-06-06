@@ -29,6 +29,7 @@ class Board:
     current_player: Stone = Stone.BLACK
     last_move: Move | None = None
 
+
     def __post_init__(self) -> None:
         if self.size < self.win_length:
             raise ValueError("board size must be at least win_length")
